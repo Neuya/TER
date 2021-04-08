@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.13)  8 APR 2021 07:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.13)  8 APR 2021 16:11
 entering extended mode
 **./ter.tex
 (ter.tex
@@ -188,45 +188,99 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
+(C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e.
+sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count275
+ (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\algocf@hangindent=\skip52
+
+(C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count276
+) (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+(C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+\skiptotal=\skip53
+\skiplinenumber=\skip54
+\skiprule=\skip55
+\skiphlne=\skip56
+\skiptext=\skip57
+\skiplength=\skip58
+\algomargin=\skip59
+\skipalgocfslide=\skip60
+\algowidth=\dimen166
+\inoutsize=\dimen167
+\inoutindent=\dimen168
+\interspacetitleruled=\dimen169
+\interspacealgoruled=\dimen170
+\interspacetitleboxruled=\dimen171
+\algocf@ruledwidth=\skip61
+\algocf@inoutbox=\box49
+\algocf@inputbox=\box50
+\AlCapSkip=\skip62
+\AlCapHSkip=\skip63
+\algoskipindent=\skip64
+\algocf@nlbox=\box51
+\algocf@hangingbox=\box52
+\algocf@untilbox=\box53
+\algocf@skipuntil=\skip65
+\algocf@capbox=\box54
+\algocf@lcaptionbox=\skip66
+\algoheightruledefault=\skip67
+\algoheightrule=\skip68
+\algotitleheightruledefault=\skip69
+\algotitleheightrule=\skip70
+\c@algocfline=\count277
+\c@algocfproc=\count278
+\c@algocf=\count279
+\algocf@algoframe=\box55
+\algocf@algobox=\box56
+)
 (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
 ex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count275
-\l__pdf_internal_box=\box49
+\l__kernel_color_stack_int=\count280
+\l__pdf_internal_box=\box57
 ) (ter.aux)
 \openout1 = `ter.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Info: Redefining \degres on input line 11.
-LaTeX Info: Redefining \dots on input line 11.
-LaTeX Info: Redefining \up on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Info: Redefining \degres on input line 12.
+LaTeX Info: Redefining \dots on input line 12.
+LaTeX Info: Redefining \up on input line 12.
 
 (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
 i
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count276
-\scratchdimen=\dimen166
-\scratchbox=\box50
-\nofMPsegments=\count277
-\nofMParguments=\count278
+\scratchcounter=\count281
+\scratchdimen=\dimen172
+\scratchbox=\box58
+\nofMPsegments=\count282
+\nofMParguments=\count283
 \everyMPshowfont=\toks24
-\MPscratchCnt=\count279
-\MPscratchDim=\dimen167
-\MPnumerator=\count280
-\makeMPintoPDFobject=\count281
+\MPscratchCnt=\count284
+\MPscratchDim=\dimen173
+\MPnumerator=\count285
+\makeMPintoPDFobject=\count286
 \everyMPtoPDFconversion=\toks25
 )
 (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
@@ -237,12 +291,12 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 13.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 14.
 
  (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 13.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
 
  (C:\Users\yann\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -255,37 +309,37 @@ LaTeX Warning: No \author given.
 {C:/Users/yann/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 Chapitre 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
+Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
 <FIBOLfsr.png, id=7, 332.442pt x 171.64125pt>
 File: FIBOLfsr.png Graphic file (type png)
 <use FIBOLfsr.png>
-Package pdftex.def Info: FIBOLfsr.png  used on input line 36.
+Package pdftex.def Info: FIBOLfsr.png  used on input line 37.
 (pdftex.def)             Requested size: 332.44118pt x 171.64081pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--42
+Underfull \hbox (badness 10000) in paragraph at lines 33--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--42
+Underfull \hbox (badness 10000) in paragraph at lines 33--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--42
+Underfull \hbox (badness 10000) in paragraph at lines 33--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--42
+Underfull \hbox (badness 10000) in paragraph at lines 33--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--42
+Underfull \hbox (badness 10000) in paragraph at lines 33--43
 
  []
 
@@ -295,17 +349,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 65--67
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
 <GaloisLFSR.png, id=21, 449.2785pt x 139.11975pt>
 File: GaloisLFSR.png Graphic file (type png)
 <use GaloisLFSR.png>
-Package pdftex.def Info: GaloisLFSR.png  used on input line 68.
+Package pdftex.def Info: GaloisLFSR.png  used on input line 69.
 (pdftex.def)             Requested size: 449.27739pt x 139.1194pt.
 
-Overfull \hbox (89.27739pt too wide) in paragraph at lines 68--69
+Overfull \hbox (89.27739pt too wide) in paragraph at lines 69--70
  [] 
  []
 
@@ -314,7 +368,7 @@ Chapitre 2.
 <FiboFCSR.png, id=31, 411.939pt x 178.266pt>
 File: FiboFCSR.png Graphic file (type png)
 <use FiboFCSR.png>
-Package pdftex.def Info: FiboFCSR.png  used on input line 110.
+Package pdftex.def Info: FiboFCSR.png  used on input line 111.
 (pdftex.def)             Requested size: 288.35532pt x 124.78534pt.
 [4
 
@@ -322,65 +376,65 @@ Package pdftex.def Info: FiboFCSR.png  used on input line 110.
 <GaloisFCSR.png, id=36, 411.939pt x 182.48175pt>
 File: GaloisFCSR.png Graphic file (type png)
 <use GaloisFCSR.png>
-Package pdftex.def Info: GaloisFCSR.png  used on input line 136.
+Package pdftex.def Info: GaloisFCSR.png  used on input line 137.
 (pdftex.def)             Requested size: 288.35532pt x 127.73634pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--144
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--144
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--144
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
 
  []
 
 [5 <./FiboFCSR.png> <./GaloisFCSR.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 149--153
+Underfull \hbox (badness 10000) in paragraph at lines 150--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--173
+Underfull \hbox (badness 10000) in paragraph at lines 162--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--173
+Underfull \hbox (badness 10000) in paragraph at lines 162--174
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 182--187
+Underfull \hbox (badness 10000) in paragraph at lines 183--188
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--202
+Underfull \hbox (badness 10000) in paragraph at lines 192--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--202
+Underfull \hbox (badness 10000) in paragraph at lines 192--203
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 226--231
+Underfull \hbox (badness 10000) in paragraph at lines 227--232
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 233--238
+Underfull \hbox (badness 10000) in paragraph at lines 234--239
 
  []
 
 [8]
-Overfull \hbox (4.75421pt too wide) in paragraph at lines 261--264
+Overfull \hbox (4.75421pt too wide) in paragraph at lines 262--265
 \T1/cmr/m/n/10.95 Pour un FCSR en mode Ga-lois de lon-gueur $\OML/cmm/m/it/10.9
 5 r$ \T1/cmr/m/n/10.95 de re-gistre ini-tial $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it
 /10.95 a[]; a[]; :::; a[]\OT1/cmr/m/n/10.95 )$
@@ -389,55 +443,55 @@ Overfull \hbox (4.75421pt too wide) in paragraph at lines 261--264
 [9] [10]
 Chapitre 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--287
+Underfull \hbox (badness 10000) in paragraph at lines 284--288
 
  []
 
 
-Overfull \hbox (16.5164pt too wide) in paragraph at lines 290--295
+Overfull \hbox (16.5164pt too wide) in paragraph at lines 291--296
 \T1/cmr/m/n/10.95 L'algorithme que nous al-lons pré-sen-ter est ana-logue à l'a
 l-go-rithme de Berkelamp-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 290--295
+Underfull \hbox (badness 10000) in paragraph at lines 291--296
 
  []
 
 [11
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 297--318
+Underfull \hbox (badness 10000) in paragraph at lines 298--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--318
+Underfull \hbox (badness 10000) in paragraph at lines 298--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--318
+Underfull \hbox (badness 10000) in paragraph at lines 298--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--318
+Underfull \hbox (badness 10000) in paragraph at lines 298--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--318
+Underfull \hbox (badness 10000) in paragraph at lines 298--319
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 331--335
+Underfull \hbox (badness 10000) in paragraph at lines 332--336
 
  []
 
 
-Overfull \hbox (12.18886pt too wide) detected at line 353
+Overfull \hbox (12.18886pt too wide) detected at line 354
 \OML/cmm/m/it/10.95 d \OT1/cmr/m/n/10.95 = (1 + \OMS/cmsy/m/n/10.95 j\OML/cmm/m
 /it/10.95 q\OMS/cmsy/m/n/10.95 j\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 =\OT1/c
 mr/m/n/10.95 2 = (\OML/cmm/m/it/10.95 AE\OT1/cmr/m/n/10.95 985\OML/cmm/m/it/10.
@@ -448,52 +502,63 @@ cmr/m/n/10.95 4254\OML/cmm/m/it/10.95 E\OT1/cmr/m/n/10.95 )
  []
 
 
-Overfull \hbox (13.17398pt too wide) in paragraph at lines 353--360
+Overfull \hbox (13.17398pt too wide) in paragraph at lines 354--361
 \T1/cmr/m/n/10.95 Ce qui nous donne $\OML/cmm/m/it/10.95 F[] \OT1/cmr/m/n/10.95
  = 00110111010010101010$ \T1/cmr/m/n/10.95 et $\OML/cmm/m/it/10.95 F[] \OT1/cmr
 /m/n/10.95 = 10011010110111000001$
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 371--375
+Underfull \hbox (badness 10000) in paragraph at lines 372--376
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--386
+Underfull \hbox (badness 10000) in paragraph at lines 378--387
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--386
+Underfull \hbox (badness 10000) in paragraph at lines 378--387
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 390--394
+Underfull \hbox (badness 10000) in paragraph at lines 391--395
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 390--394
+Underfull \hbox (badness 10000) in paragraph at lines 391--395
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 390--394
+Underfull \hbox (badness 10000) in paragraph at lines 391--395
 
  []
 
-[15] [16] [17] (ter.aux) ) 
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 435--460
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 435--460
+
+ []
+
+[17] [18] (ter.aux) ) 
 Here is how much of TeX's memory you used:
- 4933 strings out of 479697
- 75990 string characters out of 2867608
- 371887 words of memory out of 3000000
- 21984 multiletter control sequences out of 15000+200000
- 419556 words of font info for 64 fonts, out of 3000000 for 9000
+ 5933 strings out of 479697
+ 92371 string characters out of 2867608
+ 399353 words of memory out of 3000000
+ 22966 multiletter control sequences out of 15000+200000
+ 420245 words of font info for 65 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,9n,72p,941b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\yann\AppData\Local\MiKTeX\fonts/pk/ljfour/
+ 66i,16n,72p,941b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\yann\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecti1095.pk> <C:\Users\yann\AppData\Local\MiKTeX\fonts/pk/ljfour/
 jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\yann\AppData\Local\MiKTeX\fonts/pk/lj
 four/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\yann\AppData\Local\MiKTeX\fonts/
 pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\yann\AppData\Local\MiKTeX\f
@@ -513,9 +578,9 @@ type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/yann/AppData/Local/Programs/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/yann/AppData/Local/Program
 s/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/yann/AppData/
 Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ter.pdf (18 pages, 259354 bytes).
+Output written on ter.pdf (19 pages, 270730 bytes).
 PDF statistics:
- 377 PDF objects out of 1000 (max. 8388607)
+ 406 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

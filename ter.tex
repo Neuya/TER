@@ -6,6 +6,7 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage[]{algorithm2e}
 
 %Corps du document :
 \begin{document}
@@ -434,6 +435,27 @@ W_i = M_iP_i
 $$
 où $P_i$ est une matrice carré de taille 20 connue car déterminé par le filtre du FCSR. 
 On a donc nos 8 systèmes de 20 équations à 20 inconnues. 
-L'idée est de pré-calculer, pour chaque système, la solution $M_i$ pour chaque valeur possible du vecteur $W_i$. Cela requiert 8 tableaux de $2^{20}$ entrées, chaque entrée étant un vecteur de 20 bits. Cela serait nettement plus efficace si 20 octets étaient stockés dans chaque entrée, afin d'avoir la position des bits de ces octets correspondant aux bits de $M_i$. Donc un état du registre principal pourrait être trouvé grâce à une série de Ou logiques sur les 8 sauvegardés. 
-
-\end{document} 
+L'idée est de pré-calculer, pour chaque système, la solution $M_i$ pour chaque valeur possible du vecteur $W_i$. Cela requiert 8 tableaux ou tables de $2^{20}$ entrées, chaque entrée étant un vecteur de 20 bits. On devient plus efficace si 20 octets sont stockés dans chaque entrée, afin d'avoir la position des bits de ces octets correspondant aux bits de $M_i$. Donc un état du registre principal pourrait être trouvé grâce à une série de Ou logiques sur les 8 tables sauvegardés. 
+\\
+Ainsi, trouver le registre principal se fait en calculant les vecteurs $W_i$ et les 8 tables. Une partie du registre principal donné par $W_i$ est noté $TABLE_i[W_i]$
+On remarque que les matrices $P_i$ ne sont pas toute de rang plein. Donc pour notre table de solutions, certaines valeurs des $W_i$ n'ont pas de solution tandis que certaines ont des solutions (multiples d'une puissance de 2) multiples. Sur les 8 systèmes cela nous donne un total de $S=\prod_{i=0}^7 s_i$ solutions où $s_i$ est le nombre de solutions du $i$-ème système. Donc chaque $TABLE_i[W_i]$ retourne un ensemble de zéro ou de solutions multiples. Dans notre cas cette propriété optimise l'attaque car si on obtient une valeur $W_0$ pour laquelle $TABLE_0[W_0]$ ne retourne aucune solution, on peut s'arrêter instantanément car notre supposition d'apparition de l'évènement $E_{zero}$ est fausse. 
+\\\\
+\textbf{Algorithme de l'attaque:}
+\\\\
+\begin{algorithm}[H]
+\For{$t=1$ to $T_max$}{
+On sélectionne les 20 octets $z(t),z(t+1),...,z(t+19)$ respectant la condition\;
+	\For{$i=0$ to 7}{
+		Calcul des $W_i$\;
+		\eIf{$TABLE_i[W_i]$ n'a pas de solutions}{
+			break\;
+			}
+			{
+			On sauvegarde toute les valeurs possibles pour $M_i$\;
+			}
+}
+On teste toute les valeurs possibles de $(M_0,M_1,...,M_7)$ en calculant $z(t+20),z(t+21),...,$ en comparant avec le FCSR\;
+\If{Comparaison égale}{return}
+}
+\end{algorithm}
+\end{document}
