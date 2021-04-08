@@ -129,7 +129,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	\right. 
 	$$
 	
-	Finalement, la première cellule devient : $a_{r-1}=c_{n-1}+q_ra_0$
+	Finalement, la première cellule devient : $a_{r-1}=c_{r-1}+q_ra_0$
 	
 	\begin{center}
 	
@@ -139,13 +139,23 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	\end{center}
 	
 	Le $\Sigma$ représente les $z_i$ intermédiaires.
-\\	
-\\
+	\\\\
+\textbf{Remarque :} on aurait pu introduire la notion de temps $t$ à nos cellules du registre. C'est cependant totalement équivalent au modèle présenté dans les chapitres précédents : $(a_0(t) \Leftrightarrow a_{0+t})$ cela simplifie la compréhension pour la suite. \\\\
+
 	Dans les deux architectures on peut associer un FCSR de longueur r à un "entier de connexion" : 
 	$$
 	q = q_r2^r + q_{r-1}2^{r-1} + ... + q_12 - 1 \in 
 	\mathbb{Z}
 	$$
+	Pour la suite on pose $d = (1+|q|)/2$ dans certains articles cet entier est préféré pour considérer les calculs.
+	\\\\
+	Considérant le temps $t$ on peut introduire les formules suivantes pour simplifier les calculs et décrire la fonction de transition: 
+	\begin{align*}
+		a_i(t+1) &= a_{i+1}(t) \, div \, 2 \oplus d_ic_i(t) \oplus d_ia_o(t)\\
+		c_i(t+1) &= a_{i+1}(t)c_i(t) \oplus c_i(t)a_0(t) \oplus a_o(t)a_{i+1}(t)
+	\end{align*}
+		
+	
 	\section{Entiers 2-adiques}
 	
 	Un entier 2-adique est une série formelle $\alpha = \sum_{i=0}^\infty a_i2^i$ avec $a_i \in \{0,1\}$.
@@ -321,7 +331,6 @@ f(x_1,x_2,...,x_n) = \oplus_{i=1}^n f_ix_i, \; f_i \; \in \mathbb{F}_2
 $$
 Avec $\oplus$ la somme directe dans le corps $\mathbb{F}_2$.
 \\\\
-\textbf{Remarque :} on aurait pu introduire la notion de temps $t$ à nos cellules du registre. C'est cependant totalement équivalent au modèle présenté dans les chapitres précédents : $(a_0(t) \Leftrightarrow a_{0+t}$ cela simplifie la compréhension pour la suite. \\\\
 Grâce à cette fonction de filtrage, on filtre les $k$ cellules $a_i(t)$ du registre principal, on ne s'occupe pas des cellules de retenue. Afin de modéliser la séquence de notre FCSR filtré (à 1 filtre), on considère le vecteur binaire $F=(f_0,f_1,...,f_{k-1})$ de longueur $k$. La séquence produite par ce FCSR est donc :
 $$
 S=(s(t))_{t \in \mathbb{N}},
@@ -357,7 +366,74 @@ z= (a_8+a_{24}+\cdots + a_{135},\; a_1 + a_{47} + \cdots, ...)
 $$
 L'initialisation de l'automate consiste en charger la clé et le bloc IV dans le registre principal, de faire 20 itérations produisant 20 octets. Ce qui nous donne 160 bits qui seront utilisés en tant que registre initial de notre automate. Une fois l'initialisation terminée on le fait tourner 162 fois sans produire de sortie. 
 
-\section{Attaque sur les F-FCSR-H}
+\section{Faiblesse des FCSR et F-FCSR}
 
+Toute la sécurité relative des FCSR repose sur le fait qu'ils ont la capacité de créer de la non-linéarité. Cependant, cette non-linéarité ne s'applique pas sur le calcul des bits de retenue, ces derniers sont rapidement impactant sur le registre principal. Ils sont loin d'agir de manière fondamentalement aléatoire. La clé est qu'ils ont tous une variable commune : le bit de sortie. 
+\\
+\\
+Regardons ce qu'il se passe pour un bit de retenue lorsque le bit de sortie vaut zéro. En se rappelant des calculs de la fonction de transition dans la section 2.3 : 
+$$
+c_i(t+1) = a_{i+1}(t)c_i(t) \oplus c_i(t)a_0(t) \oplus a_o(t)a_{i+1}(t)
+$$
+On comprends que le bit de retenue de valeur zéro gardera sa valeur tandis qu'un bit de retenue valant 1 aura une probabilité $1/2$ de valoir zéro, en supposant que l'entrée initiale soit aléatoire. 
+Si on suppose maintenant que le bit de sortie vaut zéro plusieurs fois de suite, cela augmente fortement la probabilité que ce bit de retenue vaille zéro. On peut tout de même considérer le même raisonnement pour un bit de sortie valant 1, en effet le bit de retenue a plus de probabilité de valoir 1, mais on ignore ce cas pour l'instant. 
+\\
+\\
+Dans le cas notre F-FCSR-H on sait que notre vecteur de bits de retenue $C$ a $l= 82$ cellules et on espère qu'en moyenne, $C$ ait un poids égal à 41. Cependant, le poids est fortement corrélé à la valeur de bits de sorties. Comme explicité précédemment, à chaque fois que le bit de sortie vaut zéro, toutes les cellules de $C$ resteront des zéros et les un ont $50\%$ de chance de devenir des zéros. Donc un bit de sortie valant zéro à temps $t$ a une forte probabilité de réduire d'environ de moitié le poids du vecteur $C$ à temps $t+1$. On peut facilement observer ce comportement en observant tourner l'automate et la valeur des cellules de $C$. 
+\\
+\\
+Considérant cette observation cruciale, on en déduit une attaque. On suppose qu'on l'on observe un grand nombre consécutif de bits de sortie valant tous zéro. Cela mettrait l'ensemble des bits de retenues à zéro. Soit les $19$ prochains bits de sortie à zéro en ayant un vecteur $C$ totalement nul. Pendant ce temps l'automate a produit $20$ octets, ou 160 bits. On peut donc reconstruire le registre principal en connaissant ces valeurs et le fait que $C$ soit nul. Le soucis est que cela ne fonctionne pas exactement comme tel. 
+
+\section{Attaque sur les F-FCSR-H}
+\subsection{Hypothèse non confirmée}
+
+Les idées principale de l'attaque ont été données dans la section précédente. Cependant, l'hypothèse qu'un grand nombre consécutifs de zéro mettrait l'ensemble des bits de retenue à zéro est fausse. On pourrait constater que cela n'arrive jamais en observant simplement le déroulement de l'automate. 
+\\\\
+On considère la dernière cellule de retenue $c_1$ ($active$!) (voir figure 2.2). On va supposer que les bits de sorties valent zéro pour un temps $t$ à $t+t_0$ et le bit de sortie au temps $t-1$ était de valeur un. Sachant cela la dernière addition avec retenue doit retourner zéro en tant que nouvelle première valeur $a_{r-1}$ du registre principal. Donc mettre $c_1$ à 1. Maintenant que $c_1$ vaut 1 la seule façon pour que l'on ait une sortie nulle est que la dernière addition avec retenue vaille un. Donc la dernière cellule de retenue $c_1$ ne peut jamais valoir zéro. Dans les faits le vecteur $C$ et le bit de sortie ne peuvent valoir zéro pour un grand nombre de tours consécutifs. Il a été montré que cette situation ne peut se produire si le FCSR a atteint un état du cycle principal, ce qui est le cas pour la famille des F-FCSR, notamment grâce aux itérations d'initialisation. 
+\\\\
+\subsection{Première approche}
+
+On a vu que dans les faits l'automate FCSR a de bonnes propriétés qui empêche les attaques simples. La première hypothèse émise ne fonctionnant pas, on va légèrement modifier notre approche. Comme décrit précédemment une séquence consécutives de zéro en sortie ne peut apparaître que si le registre principal est une série de 1 et on commence par mettre le bit de retenue à 1. Donc la séquence de zéros en sortie va petit à petit changer le poids du vecteur $C$ à 1, $c_2$ valant toujours 1 (qui est la dernière cellule active si on considère l'entier $d= (1+|q|)/2$ pair car $q$ premier impair) . On définit donc l'évènement suivant : 
+
+$$
+E_{zero} : C(t) = C(t+1) = ... = C(t+19) = (0,0,...,0,1,0)
+$$
+
+Quand cet évènement se produit, on sait que l'on a eu 20 zéros consécutifs en sortie et que le vecteur $C$ a été constant pendant 20 itérations. En utilisant les arguments précédents on peut penser que l'on a besoin de d'environ $log_2(82) \approx 7$ zéros en sortie pour avoir $C$ de poids 1 et de nouveau 19 zéros consécutifs pour avoir un $C$ constant pour 20 itérations. Si on suppose une distribution uniforme sur les bits de sortie, on aurait donc une probabilité d'environ $2^{-26}$ pour que l'évènement $E_{zero}$ se produise. 
+
+\subsection{Apparition de l'évènement}
+
+On suppose que l'évènement $E_{zero}$ s'est produit, il nous reste maintenant à retrouver le registre principal en ayant comme données les octets produits (filtrés) $z(t),z(t+1),...,z(t+19)$. Cela nous donne un système de 160 équations à 160 inconnues. On pourrait le résoudre à l'aide du pivot de Gauss, avec environ $160^3$ opérations. 
+Seulement, ces équations ont une structure $TODO$...
+Il y a 20 équations qui ne comprennent que les variables $a_0,a_8,a_{16},...,a_{152}$ du registre principal, 20 autres avec $a_1,a_9,a_{17},...,a_{153}$, etc. Rappelons que nos nouvelles cellules du registre ne sont que des zéros dû à l'hypothèse. 
+\\
+Il est donc plus logique de traiter chacun des 20 équations de 20 inconnues séparément. Décrivons les équations du système linéaire plus en détail : 
+On pose $z(t)_0$ le bit de poids faible de $z(t)$ et donc on pose en tant qu'octet de sortie 
+$$
+z(t) = (z(t)_7,z(t)_6,\cdots ,z(t)_1,z(t)_0).
+$$
+ 
+Donc les équations linéaires avec comme variables les cellules du registre principal $a_i$ quand $i = 0 \, mod \, 8$ au temps $t$ peuvent être écrites de la manière suivante :
+\begin{align*}
+z(t)_0 &= a_8 \oplus a_{24} \oplus ... \oplus a_{136},\\
+z(t+1)_7 &= a_{24} \oplus a_{40} \oplus ... \oplus a_{152},\\
+\vdots\\
+z(t+19)_5 &= a_{32} \oplus a_{48} \oplus ... \oplus a_{152}.
+\end{align*}
+Des équations similaires pour toutes les valeurs de $i$ modulo 8 peuvent être listées. On peut de cette manière introduire les $W_i$ tels que : 
+\begin{align*}
+W_0 &= (z(t)_0,z(t+1)_7, \, ... \, , z(t+19)_5)\\
+W_1 &= (z(t)_1,z(t+1)_0, \, ... \, , z(t+19)_6)\\
+\vdots\\
+W_7 &= (z(t)_7,z(t+1)_6, \, ... \, , z(t+19)_4).
+\end{align*}
+
+Le vecteur des valeurs $a_j$  du registre principal avec $j = i \, mod \, 8$ est quant à lui appelé $M_i$ ( $= (a_i,a_{i+8}..)$). On a donc : 
+$$
+W_i = M_iP_i
+$$
+où $P_i$ est une matrice carré de taille 20 connue car déterminé par le filtre du FCSR. 
+On a donc nos 8 systèmes de 20 équations à 20 inconnues. 
+L'idée est de pré-calculer, pour chaque système, la solution $M_i$ pour chaque valeur possible du vecteur $W_i$. Cela requiert 8 tableaux de $2^{20}$ entrées, chaque entrée étant un vecteur de 20 bits. Cela serait nettement plus efficace si 20 octets étaient stockés dans chaque entrée, afin d'avoir la position des bits de ces octets correspondant aux bits de $M_i$. Donc un état du registre principal pourrait être trouvé grâce à une série de Ou logiques sur les 8 sauvegardés. 
 
 \end{document} 
