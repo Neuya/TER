@@ -10,13 +10,14 @@
 
 %Corps du document :
 \begin{document}
-\title{FCSR-h Filtrés}
+\author{Yann ROS - Omar EL BATANE - M1CSI}
+\title{Rapport TER - F-FCSR-H}
 \maketitle
 
-    %Hello World \LaTeX{} !
-    
-\chapter{LFSR}
-	\section{Définition}
+\tableofcontents
+\chapter{LFSR et FCSR}
+\section{LFSR}
+	\subsection{Définition}
 	Un registre à décalage à rétroaction linéaire ou LFSR (Linear Feedback Shift Register) constitue en un élément de base des générateurs pseudo-aléatoires de génération de suites de chiffres.
 	%saut	
 	
@@ -26,10 +27,10 @@
 	f(a_0,a_1,...,a_n)=q_0a_0+q_1a_1+...+q_na_n
 	\].
 	
-	\section{Architecture Fibonacci}
+	\subsection{Architecture Fibonacci}
 	Le registre est initialisé avec $r$ bits $(a_0,a_1,...,a_{r-1})$. A chaque cycle d'horloge ces bits sont additionnés (modulo 2) multipliés par les $q_i$ décrits plus hauts. \\Le bit résultant de cette opération : \\
 	\[
-	a_r = \sum_{i=0}^{r-1} a_iq_{r-i}\,(mod 2)
+	a_r = \sum_{i=0}^{r-1} a_iq_{r-i}\pmod{2}
 	\]
 	va par la suite être réinjecté dans la première cellule. Les autres bits seront tous décalés vers la cellule de droite ($a_i => a_{i+1}$).
 	\begin{figure}[!h]
@@ -44,8 +45,8 @@
 	\textbf{Exemple:} LFSR à 4 bits avec $(q_0,q_1,q_2,q_3)=(1,1,0,1)$ 
 	\begin{itemize}
 	\item Initialisation du registre avec : $(0,1,1,0)=(a_3,a_2,a_1,a_0)$
-	\item Premier tic : on calcule $a_4=0*q_0+1*q_1+1*q_2+1*q_3 = 1$ bit de sortie $a_0 = 0$. Nouvel état du registre : $(a_4,a_3,a_2,a_1)=(1,0,1,1)$
-	\item Second tic d'horloge : $a_5=1*q_0+0*q_1+1*q_2+1*q_3$
+	\item Premier tic : on calcule $a_4=0 \cdot q_0+1 \cdot q_1+1 \cdot q_2+1 \cdot q_3 = 1$ bit de sortie $a_0 = 0$. Nouvel état du registre : $(a_4,a_3,a_2,a_1)=(1,0,1,1)$
+	\item Second tic d'horloge : $a_5=1 \cdot q_0+0 \cdot q_1+1 \cdot q_2+1 \cdot q_3$
 	\item ...
 	\item Au septième tic on retrouve l'état initial : $(0,1,1,0)$
 	\end{itemize}
@@ -53,13 +54,13 @@
 	
 	
 	
-	\section{Architecture Galois}
+	\subsection{Architecture Galois}
 	
 	Dans la représentation Galois d'un LFSR les choses se présentent de la manière suivante : 
 	Pour un LFSR de longueur r, à chaque tic d'horloge, chaque cellule $a_i$ est mise à jour avec le calcul : 
 	\[
 	\forall i \in {1,..,r-2}, 
-	\,a_i = a_{i+1} + q_{i+1}a_0 \,(mod 2)\]
+	\,a_i = a_{i+1} + q_{i+1}a_0 \pmod{2}\]
 	\[ a_{r-1} = q_ra_0
 	\]
 	
@@ -81,13 +82,13 @@
 	\]
 	
 	
-\chapter{FCSR}
-\section{Définition}
+\section{FCSR}
+\subsection{Définition}
 Les FCSR (Feedback with Carry Shift Register) sont analogues aux LFSR en utilisant non plus l'addition modulo 2 mais dans $\mathbb{Z}$.
 Un FCSR de longueur $r$ est construit de manière quasi identique à un LFSR : on dispose de $r$ cellules $(a_0,..,a_{r-1})$ et d'une nouvelle cellule $m$ servant de "retenue" (carry en anglais) à l'addition dans $\mathbb{Z}$.
 
-\section{Architecture Fibonacci}
-A la manière des FCSR en architecture Fibonacci, à chaque tic d'horloge, on calcule une somme $z$ intermédiaire, puis on va décaler à droite l'ensemble des cellules du registre. A la différence que cette fois-ci on va garder la retenue et le contenu de la première cellule est le bit de parité de la somme.  
+\subsection{Architecture Fibonacci}
+A la manière des LFSR en architecture Fibonacci, à chaque tic d'horloge, on calcule une somme $z$ intermédiaire, puis on va décaler à droite l'ensemble des cellules du registre. A la différence que, cette fois-ci, on va garder la retenue et le contenu de la première cellule devient le bit de parité de la somme.  
 \\
 Cela se présente comme tel : 
 \\
@@ -99,11 +100,11 @@ z= m + \sum_{i=0}^{r-1} a_iq_{r-i} \in \mathbb{Z}
 On décale à droite l'ensemble des cellules : 
 $a_i = a_{i+1},\; \forall i \in [0,..,r-2]$
 \\
-La première cellule $a_{r-1}$ prend la valeur du bit de parité $(z \,mod(2))$. 
+La première cellule $a_{r-1}$ prend la valeur du bit de parité $(z \mod 2)$. 
 \\
 La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ : 
 \[
- 	m = z\, div \,2 \;\; \textnormal{(le quotient de la division euclidienne de z par 2)}
+ 	m = z\, div \, 2 \;\; \textnormal{(le quotient de la division euclidienne de z par 2)}
 \]
 
 \begin{center}
@@ -114,7 +115,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 
 \end{center}
 
-\section{Architecture Galois}
+\subsection{Architecture Galois}
 	
 	Concernant les FCSR en mode Galois, à l'instar de l'architecture Fibonacci, on retrouve des similitudes aux LFSR Galois. Le bit $a_0$ sert également de rétroaction à tous les autres. Les additions sont cette fois faites avec "retenue", et cette donnée est stockée dans une nouvelle cellule $c_i$ relative à sa cellule $a_i$.
 	\\
@@ -122,10 +123,10 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	$$	
 	\forall i \in \{0,...,r-1\},
 	 \left\{
-	 \begin{array}{ccc}
+	 \begin{array}{cc}
 	 z_i = a_{i+1} + c_i + q_{i+1}a_0\\
-	 a_i = z_i \, mod \,2\\
-	 c_i = z_i \, div \,2\\
+	 a_i = z_i\pmod 2\\
+	 c_i = z_i \;\,( div \, 2)\\
 	 \end{array} 
 	\right. 
 	$$
@@ -148,7 +149,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	q = q_r2^r + q_{r-1}2^{r-1} + ... + q_12 - 1 \in 
 	\mathbb{Z}
 	$$
-	Pour la suite on pose $d = (1+|q|)/2$ dans certains articles cet entier est préféré pour considérer les calculs.
+	Pour la suite on pose $d = (1+|q|)/2 = \sum_{i=0}^rd_i \cdot 2^i$. Dans certains articles, cet entier est préféré pour considérer les calculs.
 	\\\\
 	Considérant le temps $t$ on peut introduire les formules suivantes pour simplifier les calculs et décrire la fonction de transition: 
 	\begin{align*}
@@ -156,7 +157,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 		c_i(t+1) &= a_{i+1}(t)c_i(t) \oplus c_i(t)a_0(t) \oplus a_o(t)a_{i+1}(t)
 	\end{align*}
 		
-	
+\chapter{Arithmétique des FCSR}	
 	\section{Entiers 2-adiques}
 	
 	Un entier 2-adique est une série formelle $\alpha = \sum_{i=0}^\infty a_i2^i$ avec $a_i \in \{0,1\}$.
@@ -165,16 +166,16 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	S'il existe un entier $N$ tel que $a_n=0 \; \forall \, n \geq N$ alors $\alpha$ est un entier positif. Chaque entier impair $q$ a un inverse dans $\mathbb{Z}_2$
 	\\
 	\\
-	\textbf{Proposition:} Soit $A=(a_n)_{n \in \mathbb{N}}$ une séquence binaire et $\alpha = \sum_{i=0}^\infty a_i2^i$ l'entier 2-adique correspondant. La séquence $A$ est ultimement périodique si et seulement si, il existe deux nombres $p$ et $q$ (avec $q$ impair $\iff q=1\,mod2$)  dans $\mathbb{Z}$ tel que $\alpha = p/q$. De plus $A$ est strictement périodique si $pq \leq 0$ et $|p| \leq |q| \;(\iff |\alpha| \leq 1)$.
+	\textbf{Proposition:} Soit $A=(a_n)_{n \in \mathbb{N}}$ une séquence binaire et $\alpha = \sum_{i=0}^\infty a_i2^i$ l'entier 2-adique correspondant. La séquence $A$ est ultimement périodique si et seulement s'il existe deux nombres $p$ et $q$ (avec $q$ impair $\iff q=1\pmod{2}$)  dans $\mathbb{Z}$ tel que $\alpha = p/q$. De plus, $A$ est strictement périodique si $pq \leq 0$ et $|p| \leq |q| \;(\iff |\alpha| \leq 1)$.
 	\\
 	\\
-	La période de $A$ est l'ordre de 2 modulo $q$ (i.e le plus petit entier $T$ tel que $2^T = 1\,mod \,q$). Si $q$ est premier alors $T$ est un diviseur de $|q| - 1$. 
+	La période de $A$ est l'ordre de 2 modulo $q$ ($i.e$ le plus petit entier $T$ tel que $2^T = 1\pmod{q}$). Si $q$ est premier alors $T$ est un diviseur de $|q| - 1$. 
 	\\
-	A partir de la proposition précédente on peut définir un FCSR à l'aide d'un entier $q$ premier et d'une valeur initiale $p$.
+	A partir de la proposition précédente, on peut ainsi définir un FCSR à l'aide d'un entier $q$ premier et d'une valeur initiale $p$.
 	
 	\section{Conséquences sur les FCSR}
 	\subsection{Mode Fibonacci}
-	Dans cette section on considère un FCSR de longueur r en architecture Fibonacci avec un entier de connexion $q$ comme décrit plus haut, une retenue initiale $m_{r-1}$ et un registre initial $(a_0,...,a_{r-1}$ 
+	Dans cette section on considère un FCSR de longueur r en architecture Fibonacci avec un entier de connexion $q$ comme décrit plus haut, une retenue initiale $m_{r-1}$ et un registre initial $(a_0,...,a_{r-1})$ 
 	\\
 	Ce registre va donc générer une séquence infinie, potentiellement périodique, $A = (a_0,a_1,a_2,...)$ de bits associée à son entier 2-adique $\alpha = \sum_{i=0}^\infty a_i \cdot 2^i$.
 	On a $q = \sum_{i=0}^r q_i \cdot 2^i$ avec $q_0 = -1$, on définit : 
@@ -189,7 +190,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	\alpha = \sum_{i=0}^\infty a_i \cdot 2^i = p/q \in \, \mathbb{Z}_2
 	\]	
 	
-	On comprend donc que pour un même FCSR, différents état initiaux vont donner des séquences radicalement distinctes. 
+	On comprend donc que, pour un même FCSR, différents état initiaux vont donner des séquences radicalement distinctes. 
 	\\
 	\\
 	\textbf{Corollaire:}
@@ -206,7 +207,7 @@ La nouvelle cellule de "retenue" $m$ prends la valeur des autres bits de $z$ :
 	\]
 On remplace le contenu de la cellule de retenue : $$m_n = z_n\, div\, 2$$
 On décale tous les bits vers la droite, et la nouvelle cellule la plus à gauche devient : 
-$$a_n = z_n \, mod \, 2$$
+$$a_n = z_n \pmod{2}$$
 \\
 Ces équations peuvent être combinées en une seule :
 $$z_n = 2m_n + a_n$$
@@ -281,7 +282,7 @@ On rappelle qu'un FCSR produit la représentation 2-adique du nombre rationnel $
 
 \section{Introduction}
 	
-	Dans les chapitres précédents, nous avons présenté des générateurs de nombres pseudo-aléatoires classiques se basant sur des objets mathématiques avancés. Les propriétés des FCSR sont bien connues: hautement non-linéaires, périodiques et présentent de très bonnes dispositions statistiques. Mais cela n'est pas suffisant, en effet étant donné la suite générée, on peut toujours reconstruire le modèle de base (entier de connexion par exemple), il n'y a rien de proprement secret.  Dans le cas des automates LFSR, dans le but de reconstruire le modèle, on peut par exemple citer l'algorithme de Berlekamp-Massey. On utilisera un algorithme analogue à ce dernier dans le cas des FCSR. 
+	Dans les chapitres précédents, nous avons présenté des générateurs de nombres pseudo-aléatoires classiques se basant sur des objets mathématiques avancés. Les propriétés des FCSR sont bien connues: hautement non-linéaires, périodiques et présentent de très bonnes dispositions statistiques. Mais cela n'est pas suffisant, en effet, étant donné la suite générée, on peut toujours reconstruire le modèle de base (entier de connexion par exemple), il n'y a rien de proprement secret.  Dans le cas des automates LFSR, dans le but de reconstruire le modèle, on peut par exemple citer l'algorithme de Berlekamp-Massey. On utilisera un algorithme analogue à ce dernier dans le cas des FCSR. 
 	\\
 	\\	
 	C'est pour cette raison que l'idée d'introduire des filtres sur les cellules des FCSR est apparu. Grâce à la non-linéarité de tels automates, le meilleur filtre est simplement un filtre linéaire, qui effectue un XOR ("ou exclusif" équivalent à une additions de bits modulo 2) sur certains états du registre. On appelle cela les FCSR filtrés (Filtered FCSR, ou encore F-FCSR). 
@@ -294,33 +295,39 @@ On rappelle qu'un FCSR produit la représentation 2-adique du nombre rationnel $
 	 On considère que l'on a une séquence binaire $a = (a_0,a_1,..)$ potentiellement périodique. On pose également $\phi$ la fonction telle que:\\
 	 $\forall \; f=(f_1,f_2) \; \in \; \mathbb{Z} \times \mathbb{Z},$\\
 	 $$\phi(f)=max(|f1|,|f2|)$$
-	 
-	 \textbf{Algorithme :} \\\\
-	 Début : \\\\
+	 	\\\\
+		\textbf{Algorithme:}
+		\\\\
+	 \begin{algorithm}[H]
 	 Entrer les $a_i$ jusqu'à rencontrer le premier $a_{k-1}$ non nul\\
 	 $\alpha = a_{k-1} \cdot 2^{k-1}$\\
 	 $f \; = \; (0,2)$\\
-	 $g \; = \; (2^k-1,1)=(g_1,g_2)$\\\\
-	 \textbf{Tant que} il reste des bits \textbf{Faire:}\\
- entrer un nouveau bit $a_k$ \\ 
- $\alpha = \alpha + a_k2^k$\\
- \textbf{Si} $\alpha \cdot g_2 - g_1 \equiv 0 \pmod(2^{k+1})$ \textbf{alors:}\\ 
- $f = 2 \cdot f$\\
- \textbf{Sinon si} $\phi(g) < \phi(f)$ \textbf{alors:}\\
- $d = min(\phi(f+d \cdot g))$\\
- ($d \equiv 1 \pmod 2$)	 \\
- $(g,f)=(f+d \cdot g, 2g)$\\
- \textbf{Sinon:}\\
- $d = min(\phi(g+d \cdot f))$\\
- ($d \equiv 1 \pmod 2$)	 \\
-  $(g,f)=(g+d \cdot f, 2f)$\\\\
-  $k=k+1$\\
-  \textbf{Retourner} $g$\\
+	 $g \; = \; (2^k-1,1)=(g_1,g_2)$\\
+	 \While{il reste des $a_i$}{
+ 		entrer un nouveau bit $a_k$ \\ 
+ 		$\alpha = \alpha + a_k2^k$\\
+ 		\If{ $\alpha \cdot g_2 - g_1 \equiv 0 \pmod{2^{k+1}}$}{
+ 			$f = 2 \cdot f$\\
+ 			}
+ 		\eIf{ $\phi(g) < \phi(f)$ }{
+ 			$d = min(\phi(f+d \cdot g))$\\
+ 			($d \equiv 1 \pmod 2$)	 \\
+ 			$(g,f)=(f+d \cdot g, 2g)$\\
+ 			}
+ 		{
+ 			$d = min(\phi(g+d \cdot f))$\\
+ 			($d \equiv 1 \pmod 2$)	 \\
+ 			$(g,f)=(g+d \cdot f, 2f)$\\
+ 			$k=k+1$\\
+ 			}
+ 		}
+ \Return $g$
+  \end{algorithm}
  
 \section{F-FCSR}
 
 \textbf{Question : comment filtrer un automate FCSR?}\\
-Dans le cas des LFSR de nombreux outils ont été utilisés dans le but de masquer la structure du générateur, notamment en utilisant des fonctions booléennes avec des propriétés précises afin de combiner plusieurs LFSR, utilisant des combineurs avec mémoire, ou en réduisant la séquence produite par les LFSR.\\
+Dans le cas des LFSR, de nombreux outils ont été utilisés dans le but de masquer la structure du générateur, notamment en utilisant des fonctions booléennes avec des propriétés précises afin de combiner plusieurs LFSR, utilisant des combineurs avec mémoire, ou en réduisant la séquence produite par les LFSR.\\
 Il est possible d'utiliser des méthodes similaires dans le cas des FCSR, mais il n'est pas nécessaire d'utiliser des fonctions de filtrage hautement non linéaires. 
 \\
 On introduit les fonctions linéaires de filtrage de FCSR : 
@@ -367,6 +374,7 @@ z= (a_8+a_{24}+\cdots + a_{135},\; a_1 + a_{47} + \cdots, ...)
 $$
 L'initialisation de l'automate consiste en charger la clé et le bloc IV dans le registre principal, de faire 20 itérations produisant 20 octets. Ce qui nous donne 160 bits qui seront utilisés en tant que registre initial de notre automate. Une fois l'initialisation terminée on le fait tourner 162 fois sans produire de sortie. 
 
+\chapter{Attaque sur F-FCSR-H}
 \section{Faiblesse des FCSR et F-FCSR}
 
 Toute la sécurité relative des FCSR repose sur le fait qu'ils ont la capacité de créer de la non-linéarité. Cependant, cette non-linéarité ne s'applique pas sur le calcul des bits de retenue, ces derniers sont rapidement impactant sur le registre principal. Ils sont loin d'agir de manière fondamentalement aléatoire. La clé est qu'ils ont tous une variable commune : le bit de sortie. 
@@ -377,7 +385,7 @@ $$
 c_i(t+1) = a_{i+1}(t)c_i(t) \oplus c_i(t)a_0(t) \oplus a_o(t)a_{i+1}(t)
 $$
 On comprends que le bit de retenue de valeur zéro gardera sa valeur tandis qu'un bit de retenue valant 1 aura une probabilité $1/2$ de valoir zéro, en supposant que l'entrée initiale soit aléatoire. 
-Si on suppose maintenant que le bit de sortie vaut zéro plusieurs fois de suite, cela augmente fortement la probabilité que ce bit de retenue vaille zéro. On peut tout de même considérer le même raisonnement pour un bit de sortie valant 1, en effet le bit de retenue a plus de probabilité de valoir 1, mais on ignore ce cas pour l'instant. 
+Si on suppose maintenant que le bit de sortie vaut zéro plusieurs fois de suite, cela augmente fortement la probabilité que ce bit de retenue vaille zéro. On peut tout de même considérer le même raisonnement pour un bit de sortie valant 1, en effet, le bit de retenue a plus de probabilité de valoir 1, mais on ignore ce cas pour l'instant. 
 \\
 \\
 Dans le cas notre F-FCSR-H on sait que notre vecteur de bits de retenue $C$ a $l= 82$ cellules et on espère qu'en moyenne, $C$ ait un poids égal à 41. Cependant, le poids est fortement corrélé à la valeur de bits de sorties. Comme explicité précédemment, à chaque fois que le bit de sortie vaut zéro, toutes les cellules de $C$ resteront des zéros et les un ont $50\%$ de chance de devenir des zéros. Donc un bit de sortie valant zéro à temps $t$ a une forte probabilité de réduire d'environ de moitié le poids du vecteur $C$ à temps $t+1$. On peut facilement observer ce comportement en observant tourner l'automate et la valeur des cellules de $C$. 
@@ -405,7 +413,7 @@ Quand cet évènement se produit, on sait que l'on a eu 20 zéros consécutifs e
 \subsection{Apparition de l'évènement}
 
 On suppose que l'évènement $E_{zero}$ s'est produit, il nous reste maintenant à retrouver le registre principal en ayant comme données les octets produits (filtrés) $z(t),z(t+1),...,z(t+19)$. Cela nous donne un système de 160 équations à 160 inconnues. On pourrait le résoudre à l'aide du pivot de Gauss, avec environ $160^3$ opérations. 
-Seulement, ces équations ont une structure $TODO$...
+Seulement, on remarque que ces équations ont une structure spéciale.
 Il y a 20 équations qui ne comprennent que les variables $a_0,a_8,a_{16},...,a_{152}$ du registre principal, 20 autres avec $a_1,a_9,a_{17},...,a_{153}$, etc. Rappelons que nos nouvelles cellules du registre ne sont que des zéros dû à l'hypothèse. 
 \\
 Il est donc plus logique de traiter chacun des 20 équations de 20 inconnues séparément. Décrivons les équations du système linéaire plus en détail : 
@@ -429,7 +437,7 @@ W_1 &= (z(t)_1,z(t+1)_0, \, ... \, , z(t+19)_6)\\
 W_7 &= (z(t)_7,z(t+1)_6, \, ... \, , z(t+19)_4).
 \end{align*}
 
-Le vecteur des valeurs $a_j$  du registre principal avec $j = i \, mod \, 8$ est quant à lui appelé $M_i$ ( $= (a_i,a_{i+8}..)$). On a donc : 
+Le vecteur des valeurs $a_j$  du registre principal avec $j = i \pmod 8$ est quant à lui appelé $M_i$ ( $= (a_i,a_{i+8}..)$). On a donc : 
 $$
 W_i = M_iP_i
 $$
@@ -445,7 +453,7 @@ On remarque que les matrices $P_i$ ne sont pas toute de rang plein. Donc pour no
 \begin{algorithm}[H]
 \For{$t=1$ to $T_max$}{
 On sélectionne les 20 octets $z(t),z(t+1),...,z(t+19)$ respectant la condition\;
-	\For{$i=0$ to 7}{
+	\For{$i=0$ to $7$}{
 		Calcul des $W_i$\;
 		\eIf{$TABLE_i[W_i]$ n'a pas de solutions}{
 			break\;
